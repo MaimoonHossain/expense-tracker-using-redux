@@ -9,6 +9,7 @@ const persistConfig = {
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-export let store = createStore(persistedReducer)
-export let persistor = persistStore(store)
+const persistedReducer = persistReducer(persistConfig, rootReducer) //enhancer
+export let store = createStore(persistedReducer) // creates a store and saves the current state of the store
+export let persistor = persistStore(store) //creates an instance store
+// enhancer  allows a user to continuer their work from where they left off

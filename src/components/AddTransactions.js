@@ -18,7 +18,7 @@ export default function AddTransactions({id, addTransaction}) {
       setDate("")
   }
   return (
-    <div>
+    <div className="column">
       <h3>Add Transaction</h3>
       <form onSubmit={onSubmit}>
         <div className="form-control">
