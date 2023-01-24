@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export default function IncomeExpense({ transactions }) {
+
+export function IncomeExpense({ transactions }) {
   const amount = transactions.map((transaction) => Number(transaction.amount));
   const income = amount
     .filter((item) => item > 0)
@@ -21,3 +23,9 @@ export default function IncomeExpense({ transactions }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({ // Maps the store of the store to the props of the component
+    transactions: state.transactions, // Maps the transactions of the store to the props of the component
+});
+
+export default connect(mapStateToProps)(IncomeExpense);

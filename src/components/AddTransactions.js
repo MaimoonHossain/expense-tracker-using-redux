@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { addTransaction } from "../redux/actions";
 
-export default function AddTransactions({id, addTransaction}) {
+export function AddTransactions({id, addTransaction}) {
+
   const [text, setText] = useState("");
-  const [amount, setAmount] = useState(0)
-  const [date, setDate] = useState("")
+  const [amount, setAmount] = useState(0);
+  const [date, setDate] = useState("");
   const onSubmit = (event) => {
       event.preventDefault()
       const newTransaction = {
-          id: id,
+          id: Math.floor(Math.random() * 100000000),
           text: text,
           amount: amount,
           date: date
@@ -17,6 +20,7 @@ export default function AddTransactions({id, addTransaction}) {
       setAmount(0)
       setDate("")
   }
+
   return (
     <div className="column">
       <h3>Add Transaction</h3>
@@ -38,3 +42,15 @@ export default function AddTransactions({id, addTransaction}) {
     </div>
   );
 }
+
+// const mapStateToProps = (state) => ({ // Maps the store of the store to the props of the component
+//     transactions: state.transactions, // Maps the transactions of the store to the props of the component
+//     id: Math.floor(Math.random() * 100000000)
+// });
+
+const mapDispatchToProps = (dispatch) => ({ // Maps the dispatch to the props of the component, contains properties that leads to different actions that you want to dispatch from the component
+    addTransaction: (transaction) => dispatch(addTransaction(transaction))
+    // deleteTransaction: (id) => dispatch(deleteTransaction(id)) // When these functions are called they dispatch an action to the store
+});
+
+export default connect(null, mapDispatchToProps)(AddTransactions);

@@ -1,6 +1,10 @@
 import React from "react";
+import {deleteTransaction} from "../redux/actions";
+import {connect} from "react-redux";
+// import {TransactionsList} from "./TransactionsList";
+// import {transaction, deleteTransaction} from "../redux/GlobalStore";
 
-export default function Transaction({ transaction, deleteTransaction }) {
+export function Transaction({ transaction, deleteTransaction }) {
   let sign = transaction.amount >= 0 ? "+" : "-";
   return (
     <li className={transaction.amount >= 0 ? "plus" : "minus"}>
@@ -18,3 +22,14 @@ export default function Transaction({ transaction, deleteTransaction }) {
     </li>
   );
 }
+
+const mapStateToProps = (state) => ({ // Maps the store of the store to the props of the component
+    transactions: state.transactions, // Maps the transactions of the store to the props of the component
+});
+
+const mapDispatchToProps = (dispatch) => ({ // Maps the dispatch to the props of the component, contains properties that leads to different actions that you want to dispatch from the component
+    // addTransaction: (transaction) => dispatch(addTransaction(transaction)),
+    deleteTransaction: (id) => dispatch(deleteTransaction(id)) // When these functions are called they dispatch an action to the store
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Transaction);

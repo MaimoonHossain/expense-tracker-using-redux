@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export default function Balance({ transactions }) {
+
+export function Balance({ transactions }) {
   const amount = transactions.map((transaction) => Number(transaction.amount));
   const total = amount.reduce((acc, item) => acc + item, 0);
   return (
@@ -10,3 +12,9 @@ export default function Balance({ transactions }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({ // Maps the store of the store to the props of the component
+    transactions: state.transactions, // Maps the transactions of the store to the props of the component
+});
+
+export default connect(mapStateToProps)(Balance);

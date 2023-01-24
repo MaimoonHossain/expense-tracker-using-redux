@@ -10,3 +10,4 @@ export const deleteTransaction = (transactionId) => ({
     type: DELETE_TRANSACTION,
     payload: transactionId
 })
+
